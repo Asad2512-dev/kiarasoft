@@ -3,7 +3,7 @@
 use App\Http\Controllers as C;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => auth()->check() ? redirect()->route(auth()->user()->homeRoute()) : redirect()->route('login'));
+Route::get('/', fn () => auth()->check() ? redirect()->route(auth()->user()->homeRoute()) : view('landing'))->name('home');
 
 Route::middleware(['auth', 'auth.session', 'active'])->group(function () {
     Route::get('profile', [C\ProfileController::class, 'edit'])->name('profile.edit');

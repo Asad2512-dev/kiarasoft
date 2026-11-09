@@ -34,6 +34,14 @@ class PagesTest extends TestCase
         $this->get('/login')->assertHeader('X-Frame-Options', 'SAMEORIGIN')->assertHeader('X-Content-Type-Options', 'nosniff');
     }
 
+    public function test_landing_page_for_guests_and_redirect_for_users(): void
+    {
+        $this->get('/')->assertOk()->assertSee('Register your shop')->assertSee(route('login'), false);
+        $f = $this->makeShop();
+        $this->actingAs($f->cashier)->get('/')->assertRedirect(route('pos.index'));
+        $this->actingAs($f->admin)->get('/')->assertRedirect(route('dashboard'));
+    }
+
     public function test_output_is_xss_escaped(): void
     {
         $f = $this->makeShop();

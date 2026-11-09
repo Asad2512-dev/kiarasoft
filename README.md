@@ -11,6 +11,7 @@ BS Computer Science Final Year Project. **PHP 8.3 · Laravel 11 · MySQL 8 (Inno
 - Controlled partial/full returns with proportional refunds and optional restocking
 - Real dashboards and reports (daily/weekly/monthly/custom, branch, cashier, top products) with CSV export and print
 - Audit log, shop settings, onboarding and approval, backups with tested restore, and system health checks
+- Public landing page at `/` (signed-in users go straight to their dashboard)
 - Responsive layouts designed for phones, tablets and desktops
 
 ## Quick start
