@@ -1,0 +1,110 @@
+// =====================================================================
+// KiraSoft design tokens — single source of truth for the visual system
+// =====================================================================
+
+// Brand: deep emerald (fresh produce / trust) + saffron accent
+$ks-brand-50:  #ecfdf5;
+$ks-brand-100: #d1fae5;
+$ks-brand-200: #a7f3d0;
+$ks-brand-500: #10b981;
+$ks-brand-600: #059669;
+$ks-brand-700: #047857;
+$ks-brand-800: #065f46;
+$ks-brand-900: #064e3b;
+$ks-accent:    #f59e0b;
+
+// Neutrals (slate)
+$ks-gray-25:  #fbfcfd;
+$ks-gray-50:  #f6f8fa;
+$ks-gray-100: #eef1f5;
+$ks-gray-200: #e3e8ee;
+$ks-gray-300: #cfd6df;
+$ks-gray-400: #98a2b3;
+$ks-gray-500: #667085;
+$ks-gray-600: #475467;
+$ks-gray-700: #344054;
+$ks-gray-800: #1d2939;
+$ks-gray-900: #101828;
+
+// Semantic
+$ks-success: #12b76a;
+$ks-warning: #f79009;
+$ks-danger:  #f04438;
+$ks-info:    #2e90fa;
+
+// Typography
+$ks-font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$ks-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+// Radius / shadow / motion
+$ks-radius-sm: .5rem;
+$ks-radius:    .75rem;
+$ks-radius-lg: 1rem;
+$ks-shadow-xs: 0 1px 2px rgba(16, 24, 40, .05);
+$ks-shadow-sm: 0 1px 3px rgba(16, 24, 40, .08), 0 1px 2px rgba(16, 24, 40, .04);
+$ks-shadow-md: 0 8px 24px -6px rgba(16, 24, 40, .12), 0 2px 6px -2px rgba(16, 24, 40, .06);
+$ks-shadow-lg: 0 24px 48px -12px rgba(16, 24, 40, .18);
+$ks-ease: cubic-bezier(.2, .8, .2, 1);
+
+// Layout
+$ks-sidebar-w: 264px;
+$ks-sidebar-w-collapsed: 76px;
+$ks-topbar-h: 64px;
+
+// ---------- Bootstrap overrides ----------
+$primary:   $ks-brand-600;
+$secondary: $ks-gray-500;
+$success:   $ks-success;
+$warning:   $ks-warning;
+$danger:    $ks-danger;
+$info:      $ks-info;
+$light:     $ks-gray-50;
+$dark:      $ks-gray-900;
+
+$body-bg: $ks-gray-50;
+$body-color: $ks-gray-800;
+$font-family-sans-serif: $ks-font-sans;
+$font-size-base: .9375rem;
+$headings-font-weight: 650;
+$headings-color: $ks-gray-900;
+$border-color: $ks-gray-200;
+$border-radius: $ks-radius-sm;
+$border-radius-sm: .375rem;
+$border-radius-lg: $ks-radius;
+$box-shadow-sm: $ks-shadow-xs;
+$box-shadow: $ks-shadow-sm;
+$box-shadow-lg: $ks-shadow-lg;
+$link-color: $ks-brand-700;
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+$input-btn-padding-y: .55rem;
+$input-btn-padding-x: .95rem;
+$input-border-color: $ks-gray-300;
+$input-focus-border-color: $ks-brand-500;
+$input-btn-focus-color: rgba($ks-brand-500, .22);
+$input-btn-focus-width: .25rem;
+$input-placeholder-color: $ks-gray-400;
+$form-label-font-weight: 550;
+$form-label-color: $ks-gray-700;
+$btn-font-weight: 550;
+
+$card-border-color: $ks-gray-200;
+$card-border-radius: $ks-radius;
+$card-cap-bg: transparent;
+$card-spacer-y: 1.25rem;
+$card-spacer-x: 1.25rem;
+
+$table-cell-padding-y: .8rem;
+$table-cell-padding-x: 1rem;
+$table-border-color: $ks-gray-100;
+$table-th-font-weight: 600;
+
+$modal-content-border-radius: $ks-radius-lg;
+$dropdown-border-color: $ks-gray-200;
+$dropdown-border-radius: $ks-radius;
+$dropdown-box-shadow: $ks-shadow-md;
+$badge-font-weight: 600;
+$pagination-border-radius: $ks-radius-sm;
+$enable-shadows: false;
+$enable-negative-margins: true;
