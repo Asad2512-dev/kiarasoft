@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => $employee->exists ? 'Edit employee' : 'Add employee'])
 @section('content')
 <div class="page-head"><div><a href="{{ route('employees.index') }}" class="small text-muted"><i class="bi bi-arrow-left"></i> Employees</a><h1 class="mt-1">{{ $employee->exists ? 'Edit '.$employee->name : 'Add an employee' }}</h1></div></div>
-<form method="POST" action="{{ $employee->exists ? route('employees.update', $employee) : route('employees.store') }}" class="card">
+<form method="POST" action="{{ $employee->exists ? route('employees.update', $employee) : route('employees.store') }}" class="card" @if($employee->exists) data-confirm="Update {{ $employee->name }}? Role and branch changes take effect on their next page load." data-confirm-title="Update employee?" data-confirm-button="Save changes" @endif>
     @csrf @if($employee->exists) @method('PUT') @endif
     <div class="card-body">
         <div class="form-section row g-3">

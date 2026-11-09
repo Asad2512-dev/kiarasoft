@@ -3,7 +3,7 @@
 <div class="page-head">
     <div><a href="{{ route('admin.shops.index') }}" class="small text-muted"><i class="bi bi-arrow-left"></i> Shops</a><h1 class="mt-1">{{ $shop->name }} <x-active-badge :active="$shop->isActive()" off="Suspended"/></h1><p>{{ $shop->owner_name }} · {{ $shop->city ?: 'No city' }} · joined {{ $shop->created_at->format('d M Y') }}</p></div>
     <div class="actions">
-        <form method="POST" action="{{ route('admin.shops.toggle', $shop) }}" data-confirm="{{ $shop->isActive() ? 'Suspend' : 'Activate' }} {{ $shop->name }}?">@csrf @method('PATCH')<button class="btn {{ $shop->isActive() ? 'btn-soft-danger' : 'btn-soft-primary' }}">{{ $shop->isActive() ? 'Suspend shop' : 'Activate shop' }}</button></form>
+        <form method="POST" action="{{ route('admin.shops.toggle', $shop) }}" data-confirm-title="Change status?" data-confirm-button="Yes, continue" data-confirm-tone="danger" data-confirm="{{ $shop->isActive() ? 'Suspend' : 'Activate' }} {{ $shop->name }}?">@csrf @method('PATCH')<button class="btn {{ $shop->isActive() ? 'btn-soft-danger' : 'btn-soft-primary' }}">{{ $shop->isActive() ? 'Suspend shop' : 'Activate shop' }}</button></form>
         <a href="{{ route('admin.shops.edit', $shop) }}" class="btn btn-white"><i class="bi bi-pencil"></i> Edit</a>
     </div>
 </div>

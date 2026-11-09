@@ -7,7 +7,7 @@
 @if($categories->isEmpty())
     <div class="alert alert-warning">You need at least one active category first. <a href="{{ route('categories.index') }}">Create a category</a>.</div>
 @endif
-<form method="POST" action="{{ $product->exists ? route('products.update', $product) : route('products.store') }}" enctype="multipart/form-data" class="card" x-data="{ unit: @js(old('unit', $product->unit?->value)) }">
+<form method="POST" action="{{ $product->exists ? route('products.update', $product) : route('products.store') }}" enctype="multipart/form-data" class="card" @if($product->exists) data-confirm="Update {{ $product->name }}? New prices apply to future sales only; past invoices keep their original prices." data-confirm-title="Update product?" data-confirm-button="Save changes" @endif x-data="{ unit: @js(old('unit', $product->unit?->value)) }">
     @csrf @if($product->exists) @method('PUT') @endif
     <div class="card-body">
         <div class="form-section row g-3">

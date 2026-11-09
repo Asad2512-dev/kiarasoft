@@ -2,7 +2,7 @@
 @section('content')
 <div class="page-head"><div><a href="{{ $shop->exists ? route('admin.shops.show', $shop) : route('admin.shops.index') }}" class="small text-muted"><i class="bi bi-arrow-left"></i> Back</a><h1 class="mt-1">{{ $shop->exists ? 'Edit '.$shop->name : 'Onboard a new shop' }}</h1>
     @unless($shop->exists)<p>Creates the shop, default settings, a "Main Branch" and the Shop Admin account with a temporary password.</p>@endunless</div></div>
-<form method="POST" action="{{ $shop->exists ? route('admin.shops.update', $shop) : route('admin.shops.store') }}" class="card" style="max-width: 820px">
+<form method="POST" action="{{ $shop->exists ? route('admin.shops.update', $shop) : route('admin.shops.store') }}" class="card" style="max-width: 820px" @if($shop->exists) data-confirm="Update the details of {{ $shop->name }}?" data-confirm-title="Update shop?" @endif>
     @csrf @if($shop->exists) @method('PUT') @endif
     <div class="card-body"><div class="row g-3">
         @php $n = $shop->exists ? 'name' : 'shop_name'; @endphp

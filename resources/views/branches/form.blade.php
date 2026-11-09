@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => $branch->exists ? 'Edit branch' : 'Add branch'])
 @section('content')
 <div class="page-head"><div><a href="{{ $branch->exists ? route('branches.show', $branch) : route('branches.index') }}" class="small text-muted"><i class="bi bi-arrow-left"></i> Back</a><h1 class="mt-1">{{ $branch->exists ? 'Edit '.$branch->name : 'Add a branch' }}</h1></div></div>
-<form method="POST" action="{{ $branch->exists ? route('branches.update', $branch) : route('branches.store') }}" class="card">
+<form method="POST" action="{{ $branch->exists ? route('branches.update', $branch) : route('branches.store') }}" class="card" @if($branch->exists) data-confirm="Update {{ $branch->name }}? Staff assignments will be updated immediately." data-confirm-title="Update branch?" data-confirm-button="Save changes" @endif>
     @csrf @if($branch->exists) @method('PUT') @endif
     <div class="card-body">
         <div class="form-section row g-3">

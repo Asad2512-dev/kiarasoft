@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => 'Shop settings'])
 @section('content')
 <div class="page-head"><div><h1>Shop settings</h1><p>Business details, receipts, tax and stock defaults.</p></div></div>
-<form method="POST" action="{{ route('settings.update') }}" enctype="multipart/form-data" class="card">
+<form method="POST" action="{{ route('settings.update') }}" enctype="multipart/form-data" class="card" data-confirm="These settings affect receipts, invoice numbers, tax and stock alerts for all branches." data-confirm-title="Save shop settings?" data-confirm-button="Save settings">
     @csrf @method('PUT')
     <div class="card-body">
         <div class="form-section row g-3">

@@ -64,7 +64,7 @@
                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bi bi-person me-2"></i>My profile</a></li>
                         @can('settings.manage')<li><a class="dropdown-item" href="{{ route('settings.edit') }}"><i class="bi bi-gear me-2"></i>Shop settings</a></li>@endcan
                         <li><hr class="dropdown-divider"></li>
-                        <li><form method="POST" action="{{ route('logout') }}" data-no-lock>@csrf<button class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>Sign out</button></form></li>
+                        <li><form method="POST" action="{{ route('logout') }}" data-no-lock data-confirm="You will need to sign in again to continue.">@csrf<button class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>Sign out</button></form></li>
                     </ul>
                 </div>
             </div>

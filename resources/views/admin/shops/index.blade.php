@@ -21,7 +21,7 @@
                 <td data-label="Joined" class="small text-muted">{{ $s->created_at->format('d M Y') }}</td>
                 <td data-label="Status"><x-active-badge :active="$s->isActive()" off="Suspended"/></td>
                 <td class="cell-actions text-end text-nowrap">
-                    <form method="POST" action="{{ route('admin.shops.toggle', $s) }}" class="d-inline" data-confirm="{{ $s->isActive() ? 'Suspend' : 'Activate' }} {{ $s->name }}? {{ $s->isActive() ? 'All its users will be signed out.' : '' }}">@csrf @method('PATCH')<button class="btn btn-sm {{ $s->isActive() ? 'btn-soft-danger' : 'btn-soft-primary' }}">{{ $s->isActive() ? 'Suspend' : 'Activate' }}</button></form>
+                    <form method="POST" action="{{ route('admin.shops.toggle', $s) }}" class="d-inline" data-confirm-title="Change status?" data-confirm-button="Yes, continue" data-confirm-tone="danger" data-confirm="{{ $s->isActive() ? 'Suspend' : 'Activate' }} {{ $s->name }}? {{ $s->isActive() ? 'All its users will be signed out.' : '' }}">@csrf @method('PATCH')<button class="btn btn-sm {{ $s->isActive() ? 'btn-soft-danger' : 'btn-soft-primary' }}">{{ $s->isActive() ? 'Suspend' : 'Activate' }}</button></form>
                     <a href="{{ route('admin.shops.show', $s) }}" class="btn btn-sm btn-white">View</a>
                 </td>
             </tr>

@@ -290,3 +290,5 @@ body.sidebar-collapsed {
   .page-head h1 { font-size: 1.3rem; }
 }
 .modal.pos-overlay { display: block; }
+.ks-confirm-icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-size: 1.6rem; background: $ks-brand-50; color: $ks-brand-700; }
+.ks-confirm[data-tone="danger"] .ks-confirm-icon { background: #fef3f2; color: #b42318; }

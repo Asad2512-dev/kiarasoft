@@ -41,7 +41,7 @@
                 <td data-label="Status">@if($p->trashed())<span class="badge-soft badge-soft-secondary">Archived</span>@else<x-active-badge :active="$p->is_active"/>@endif</td>
                 <td class="cell-actions text-end text-nowrap">
                     @if($p->trashed())
-                        <form method="POST" action="{{ route('products.restore', $p->id) }}" class="d-inline">@csrf @method('PATCH')<button class="btn btn-sm btn-soft-primary">Restore</button></form>
+                        <form method="POST" action="{{ route('products.restore', $p->id) }}" class="d-inline" data-confirm-title="Restore product?" data-confirm="Restore {{ $p->name }} and make it available again?" data-confirm-button="Restore">@csrf @method('PATCH')<button class="btn btn-sm btn-soft-primary">Restore</button></form>
                     @else
                         <a href="{{ route('products.edit', $p) }}" class="btn btn-sm btn-white"><i class="bi bi-pencil"></i> Edit</a>
                     @endif

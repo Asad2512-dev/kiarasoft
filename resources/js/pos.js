@@ -40,7 +40,12 @@ export default (config) => ({
 
     init() {
         this.load();
-        this.$watch('branchId', () => { if (this.cart.length && !confirm('Switching branch clears the current cart. Continue?')) return; this.cart = []; this.load(); });
+        this.$watch('branchId', async (val, old) => {
+            if (this.cart.length && !(await window.ksConfirm({ title: 'Switch branch?', message: 'Switching branch clears the current cart.', confirmText: 'Switch & clear', tone: 'danger' }))) {
+                this.branchId = old; return;
+            }
+            if (this.branchId !== old) { this.cart = []; this.load(); }
+        });
         this.$watch('query', () => (this.kb = 0));
         window.addEventListener('keydown', (e) => this.hotkeys(e));
         window.addEventListener('beforeunload', (e) => { if (this.cart.length && this.step !== 'done') { e.preventDefault(); e.returnValue = ''; } });
@@ -100,7 +105,15 @@ export default (config) => ({
     },
 
     remove(line) { this.cart = this.cart.filter((l) => l !== line); delete this.lineErrors[line.id]; },
-    clear() { if (!this.cart.length || confirm('Clear all items from the cart?')) { this.cart = []; this.lineErrors = {}; this.discountValue = ''; this.customer = ''; } },
+    async confirmRemove(line) {
+        if (await window.ksConfirm({ title: 'Remove item?', message: `Remove ${line.name} from the cart?`, confirmText: 'Remove', tone: 'danger' })) this.remove(line);
+    },
+    async clear() {
+        if (!this.cart.length) return;
+        if (await window.ksConfirm({ title: 'Clear cart?', message: `Remove all ${this.cart.length} item(s) from the current sale?`, confirmText: 'Clear cart', tone: 'danger' })) {
+            this.cart = []; this.lineErrors = {}; this.discountValue = ''; this.customer = '';
+        }
+    },
 
     lineTotal(l) { return divRound(toMilli(l.qty) * toPaisa(l.price), 1000); },
     get subtotal() { return this.cart.reduce((s, l) => s + this.lineTotal(l), 0); },

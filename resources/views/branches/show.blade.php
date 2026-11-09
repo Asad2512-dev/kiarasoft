@@ -7,7 +7,7 @@
     <div class="actions">
         @can('reports.view')<a href="{{ route('reports.index', ['branch' => $branch->id]) }}" class="btn btn-white"><i class="bi bi-bar-chart-line"></i> Branch report</a>@endcan
         @can('update', $branch)
-            <form method="POST" action="{{ route('branches.toggle', $branch) }}" data-confirm="{{ $branch->is_active ? 'Deactivate' : 'Activate' }} {{ $branch->name }}?">@csrf @method('PATCH')<button class="btn btn-white">{{ $branch->is_active ? 'Deactivate' : 'Activate' }}</button></form>
+            <form method="POST" action="{{ route('branches.toggle', $branch) }}" data-confirm-title="Change status?" data-confirm-button="Yes, continue" data-confirm-tone="danger" data-confirm="{{ $branch->is_active ? 'Deactivate' : 'Activate' }} {{ $branch->name }}?">@csrf @method('PATCH')<button class="btn btn-white">{{ $branch->is_active ? 'Deactivate' : 'Activate' }}</button></form>
             <a href="{{ route('branches.edit', $branch) }}" class="btn btn-primary"><i class="bi bi-pencil"></i> Edit</a>
         @endcan
     </div>

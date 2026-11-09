@@ -33,7 +33,7 @@
                             <button class="btn btn-sm btn-white btn-icon" data-bs-toggle="dropdown" aria-label="More actions for {{ $e->name }}"><i class="bi bi-three-dots"></i></button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <form method="POST" action="{{ route('employees.password', $e) }}" data-confirm="Generate a new temporary password for {{ $e->name }}? They will be signed out.">@csrf<button class="dropdown-item"><i class="bi bi-key me-2"></i>Reset password</button></form>
-                                <form method="POST" action="{{ route('employees.toggle', $e) }}" data-confirm="{{ $e->is_active ? 'Deactivate' : 'Activate' }} {{ $e->name }}?">@csrf @method('PATCH')<button class="dropdown-item {{ $e->is_active ? 'text-danger' : '' }}"><i class="bi bi-{{ $e->is_active ? 'person-x' : 'person-check' }} me-2"></i>{{ $e->is_active ? 'Deactivate' : 'Activate' }}</button></form>
+                                <form method="POST" action="{{ route('employees.toggle', $e) }}" data-confirm-title="Change status?" data-confirm-button="Yes, continue" data-confirm-tone="danger" data-confirm="{{ $e->is_active ? 'Deactivate' : 'Activate' }} {{ $e->name }}?">@csrf @method('PATCH')<button class="dropdown-item {{ $e->is_active ? 'text-danger' : '' }}"><i class="bi bi-{{ $e->is_active ? 'person-x' : 'person-check' }} me-2"></i>{{ $e->is_active ? 'Deactivate' : 'Activate' }}</button></form>
                             </div>
                         </div>
                     @endcan

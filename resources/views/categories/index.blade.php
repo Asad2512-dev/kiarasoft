@@ -27,10 +27,10 @@
                 <td data-label="Status">@if($c->trashed())<span class="badge-soft badge-soft-secondary">Archived</span>@else<x-active-badge :active="$c->is_active"/>@endif</td>
                 <td class="cell-actions text-end text-nowrap">
                     @if($c->trashed())
-                        <form method="POST" action="{{ route('categories.restore', $c->id) }}" class="d-inline">@csrf @method('PATCH')<button class="btn btn-sm btn-soft-primary">Restore</button></form>
+                        <form method="POST" action="{{ route('categories.restore', $c->id) }}" class="d-inline" data-confirm-title="Restore category?" data-confirm="Restore {{ $c->name }}?" data-confirm-button="Restore">@csrf @method('PATCH')<button class="btn btn-sm btn-soft-primary">Restore</button></form>
                     @else
                         <button class="btn btn-sm btn-white" @click="open({{ json_encode($c->only(['id','name','description','is_active'])) }})"><i class="bi bi-pencil"></i> Edit</button>
-                        <form method="POST" action="{{ route('categories.archive', $c) }}" class="d-inline" data-confirm="Archive category {{ $c->name }}?">@csrf @method('DELETE')<button class="btn btn-sm btn-white btn-icon" title="Archive" aria-label="Archive {{ $c->name }}"><i class="bi bi-archive"></i></button></form>
+                        <form method="POST" action="{{ route('categories.archive', $c) }}" class="d-inline" data-confirm-title="Archive category?" data-confirm="Archive {{ $c->name }}? It can be restored later from the Archived tab.">@csrf @method('DELETE')<button class="btn btn-sm btn-white btn-icon" title="Archive" aria-label="Archive {{ $c->name }}"><i class="bi bi-archive"></i></button></form>
                     @endif
                 </td>
             </tr>
@@ -42,7 +42,7 @@
 
 <div class="modal fade" tabindex="-1" x-ref="modal" aria-labelledby="catTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
-        <form method="POST" :action="edit && edit.id ? @js(url('categories')) + '/' + edit.id : @js(route('categories.store'))">
+        <form method="POST" data-confirm-title="Save category?" :data-confirm="edit && edit.id ? 'Update category ' + (edit.name || '') + '?' : null" :action="edit && edit.id ? @js(url('categories')) + '/' + edit.id : @js(route('categories.store'))">
             @csrf <template x-if="edit && edit.id"><input type="hidden" name="_method" value="PUT"></template>
             <div class="modal-header"><h2 class="modal-title h5" id="catTitle" x-text="edit && edit.id ? 'Edit category' : 'New category'"></h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
             <div class="modal-body">

@@ -8,7 +8,7 @@
     <div class="actions">
         @can('inventory.adjust')<a href="{{ route('inventory.create', ['product' => $product->id]) }}" class="btn btn-white"><i class="bi bi-plus-slash-minus"></i> Adjust stock</a>@endcan
         <a href="{{ route('products.edit', $product) }}" class="btn btn-primary"><i class="bi bi-pencil"></i> Edit</a>
-        <form method="POST" action="{{ route('products.archive', $product) }}" data-confirm="Archive {{ $product->name }}? It will be hidden from the POS but invoices are kept.">@csrf @method('DELETE')<button class="btn btn-soft-danger"><i class="bi bi-archive"></i> Archive</button></form>
+        <form method="POST" action="{{ route('products.archive', $product) }}" data-confirm-title="Archive product?" data-confirm="Archive {{ $product->name }}? It will be hidden from the POS but invoices are kept.">@csrf @method('DELETE')<button class="btn btn-soft-danger"><i class="bi bi-archive"></i> Archive</button></form>
     </div>
 </div>
 <div class="row g-3 mb-3">

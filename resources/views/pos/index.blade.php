@@ -88,7 +88,7 @@
                         </div>
                         <span class="small text-muted" x-text="line.unit"></span>
                     </div>
-                    <div class="text-end"><button type="button" class="btn btn-sm btn-link text-danger p-0" @click="remove(line)" :aria-label="`Remove ${line.name}`"><i class="bi bi-x-circle"></i> Remove</button></div>
+                    <div class="text-end"><button type="button" class="btn btn-sm btn-link text-danger p-0" @click="confirmRemove(line)" :aria-label="`Remove ${line.name}`"><i class="bi bi-x-circle"></i> Remove</button></div>
                     <div class="small text-danger" style="grid-column: 1 / -1" x-show="lineErrors[line.id]" x-text="lineErrors[line.id]"></div>
                 </div>
             </template>

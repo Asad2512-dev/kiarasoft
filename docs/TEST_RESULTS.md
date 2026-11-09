@@ -12,6 +12,7 @@ All results below come from commands actually executed on **2026-11-09** in the 
 | Backup + restore into separate DB | included above (`PlatformTest`) | restored row counts match source |
 | Browser responsive smoke (4 roles × all screens × 320/375/390/768/1024/1440 px) | `node tests/Browser/smoke.cjs` | **306 page checks, 0 failures** (no HTTP errors, no JS errors, no horizontal overflow) |
 | Browser end-to-end POS checkout | `node tests/Browser/pos-flow.cjs` | passed: SKU entry, decimal qty 1.5 kg, F9 pay, change, invoice `INV-G11-…` listed in sales |
+| Browser confirmation dialogs (cancel blocks / confirm performs) | `node tests/Browser/confirm-dialogs.cjs` | **13 checks, 0 failures** |
 | CSRF enforcement (manual, against running server) | `curl -X POST -d "email=a@b.c&password=x" localhost:8000/login` | HTTP **419** (rejected without token) |
 | Seed data integrity (manual, tinker) | `InventoryService::reconcile()` after seeding | 0 mismatches, 0 negative stock rows, Σ sale subtotals = Σ line totals |
 

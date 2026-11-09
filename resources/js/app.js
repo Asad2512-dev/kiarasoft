@@ -4,8 +4,10 @@ import * as bootstrap from 'bootstrap';
 import Alpine from 'alpinejs';
 import { initCharts } from './charts';
 import pos from './pos';
+import { ksConfirm, initConfirmations } from './confirm';
 
 window.bootstrap = bootstrap;
+window.ksConfirm = ksConfirm;
 
 // ---------- Toasts ----------
 window.toast = (message, type = 'success') => {
@@ -43,10 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.ks-backdrop')?.addEventListener('click', () => body.classList.remove('sidebar-open'));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') body.classList.remove('sidebar-open'); });
 
-    // Confirmations for destructive / sensitive forms
-    document.querySelectorAll('form[data-confirm]').forEach(form => form.addEventListener('submit', e => {
-        if (!confirm(form.dataset.confirm)) e.preventDefault();
-    }));
+    // Confirmation dialogs: sign-out, DELETE/PUT/PATCH forms and data-confirm forms (see confirm.js)
+    initConfirmations();
 
     // Prevent double submits on normal forms
     document.querySelectorAll('form:not([data-no-lock])').forEach(form => form.addEventListener('submit', e => {

@@ -41,7 +41,7 @@
                     @can('inventory.adjust')
                     <div class="dropdown d-inline">
                         <button class="btn btn-sm btn-white btn-icon" data-bs-toggle="dropdown" aria-label="Set threshold" title="Set threshold"><i class="bi bi-sliders"></i></button>
-                        <form method="POST" action="{{ route('inventory.threshold', $r) }}" class="dropdown-menu dropdown-menu-end p-3" style="width: 240px">
+                        <form method="POST" action="{{ route('inventory.threshold', $r) }}" class="dropdown-menu dropdown-menu-end p-3" style="width: 240px" data-confirm-title="Update threshold?" data-confirm="Change the low-stock threshold for {{ $r->product->name }} at {{ $r->branch->name }}?">
                             @csrf @method('PUT')
                             <label class="form-label small">Low-stock threshold at {{ $r->branch->name }}</label>
                             <input type="number" step="0.001" min="0" name="low_stock_threshold" value="{{ $r->low_stock_threshold !== null ? (float)$r->low_stock_threshold : '' }}" class="form-control form-control-sm mb-2" placeholder="Use product/shop default">
