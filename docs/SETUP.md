@@ -3,6 +3,13 @@
 Requirements: PHP 8.2+ (8.3 recommended) with `pdo_mysql, mbstring, openssl, fileinfo, gd`; Composer 2; MySQL 8; Node 18+ (only needed if you change CSS/JS — built assets are committed in `public/build`).
 
 ## 1. Get the code
+On macOS with MAMP, select its PHP **before** running Composer or Artisan:
+```bash
+export PATH="/Applications/MAMP/bin/php/php8.3.14/bin:$PATH"
+php -v
+```
+Use the installed PHP version selected in MAMP. This project recommends PHP 8.3.
+
 ```bash
 git clone https://github.com/Asad2512-dev/kiarasoft.git
 ```
@@ -32,7 +39,12 @@ DB_PASSWORD=root
 MYSQLDUMP_PATH=/Applications/MAMP/Library/bin/mysqldump
 MYSQL_CLIENT_PATH=/Applications/MAMP/Library/bin/mysql
 ```
-4. Use MAMP's PHP if the system one is old: `export PATH=/Applications/MAMP/bin/php/php8.3.x/bin:$PATH`
+4. Use MAMP's PHP for CLI commands as shown above. Homebrew PHP 8.5 produces `PDO::MYSQL_ATTR_SSL_CA` deprecation warnings with this Laravel version. Add the `export PATH` line to `~/.zshrc` if you want MAMP PHP in every new terminal. Alternatively, use the project launcher without changing your shell configuration:
+   ```bash
+   ./bin/mamp php artisan --version
+   ./bin/mamp composer install
+   ```
+   The launcher defaults to installed MAMP PHP 8.3.14; override it with, for example, `MAMP_PHP_VERSION=php8.4.1 ./bin/mamp php artisan --version`. Select the same PHP version in MAMP's settings for web requests.
 5. Either point MAMP's document root to `kiarasoft/public` (then set `APP_URL=http://localhost:8888`), or simply run `php artisan serve`.
 
 ## 2b. Windows with XAMPP

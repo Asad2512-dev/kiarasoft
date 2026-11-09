@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Keep Artisan, Composer, and their child processes on MAMP's PHP.
+MAMP_PHP_BIN="/Applications/MAMP/bin/php/${MAMP_PHP_VERSION:-php8.3.14}/bin"
+
+if [ ! -x "$MAMP_PHP_BIN/php" ]; then
+    echo "MAMP PHP not found at $MAMP_PHP_BIN/php. Set MAMP_PHP_VERSION to an installed version (for example php8.4.1)." >&2
+    exit 1
+fi
+
+export PATH="$MAMP_PHP_BIN:$PATH"
+
+if [ "$#" -eq 0 ]; then
+    set -- php artisan
+fi
+
+exec "$@"
