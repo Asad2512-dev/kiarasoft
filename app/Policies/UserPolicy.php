@@ -2,12 +2,16 @@
 
 namespace App\Policies;
 
+use App\Enums\Role;
 use App\Models\User;
 
 /** Employee administration within a shop. */
 class UserPolicy
 {
-    public function viewAny(User $user): bool { return $user->hasPermission('employees.view'); }
+    public function viewAny(User $user): bool
+    {
+        return $user->hasPermission('employees.view');
+    }
 
     public function view(User $user, User $employee): bool
     {
@@ -22,11 +26,14 @@ class UserPolicy
         return $employee->id === $user->id || (bool) array_intersect($employee->accessibleBranchIds(), $user->accessibleBranchIds());
     }
 
-    public function create(User $user): bool { return $user->hasPermission('employees.manage'); }
+    public function create(User $user): bool
+    {
+        return $user->hasPermission('employees.manage');
+    }
 
     public function update(User $user, User $employee): bool
     {
         return $user->hasPermission('employees.manage') && $employee->shop_id === $user->shop_id
-            && in_array($employee->role, \App\Enums\Role::employeeRoles(), true);
+            && in_array($employee->role, Role::employeeRoles(), true);
     }
 }

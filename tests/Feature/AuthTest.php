@@ -81,7 +81,11 @@ class AuthTest extends TestCase
         $f = $this->makeShop();
         $this->post('/forgot-password', ['email' => $f->cashier->email])->assertSessionHas('status');
         $token = null;
-        Notification::assertSentTo($f->cashier, ResetPassword::class, function ($n) use (&$token) { $token = $n->token; return true; });
+        Notification::assertSentTo($f->cashier, ResetPassword::class, function ($n) use (&$token) {
+            $token = $n->token;
+
+            return true;
+        });
         $this->post('/reset-password', ['token' => $token, 'email' => $f->cashier->email, 'password' => 'NewPass123', 'password_confirmation' => 'NewPass123'])
             ->assertRedirect(route('login'));
         $this->post('/login', ['email' => $f->cashier->email, 'password' => 'NewPass123'])->assertRedirect();

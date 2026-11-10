@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Exceptions\BusinessRuleException;
 use App\Models\Branch;
 use App\Models\Category;
 use App\Models\Product;
@@ -82,7 +83,7 @@ class ManagementTest extends TestCase
         $this->actingAs($f->admin)->patch("/branches/{$b->id}/status")->assertRedirect();
         $this->assertFalse($b->fresh()->is_active);
         // inactive branch cannot sell
-        $this->expectException(\App\Exceptions\BusinessRuleException::class);
+        $this->expectException(BusinessRuleException::class);
         $this->sell($f, [['product_id' => $f->tea->id, 'quantity' => '1']], [], $f->cashier, $b->fresh());
     }
 

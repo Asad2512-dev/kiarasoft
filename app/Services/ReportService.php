@@ -8,7 +8,7 @@ use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Sales reporting. Metric definitions (also in docs/ARCHITECTURE.md §Reports):
+ * Sales reporting. Metric definitions:
  *  - Gross sales   = Σ sales.subtotal            (before discount & tax) for invoices dated in range
  *  - Discounts     = Σ sales.discount_amount
  *  - Tax           = Σ sales.tax_amount

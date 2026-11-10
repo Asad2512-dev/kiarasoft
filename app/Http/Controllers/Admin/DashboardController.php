@@ -9,6 +9,7 @@ use App\Models\Sale;
 use App\Models\Shop;
 use App\Models\SignupRequest;
 use App\Models\User;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -25,7 +26,7 @@ class DashboardController extends Controller
         $growth = Shop::selectRaw("DATE_FORMAT(created_at, '%Y-%m') as m, COUNT(*) as c")->where('created_at', '>=', now()->subMonths(5)->startOfMonth())
             ->groupBy('m')->pluck('c', 'm');
         $months = collect(range(5, 0))->map(fn ($i) => now()->subMonths($i)->format('Y-m'));
-        $chart = ['labels' => $months->map(fn ($m) => \Carbon\Carbon::createFromFormat('Y-m', $m)->format('M Y'))->values(), 'data' => $months->map(fn ($m) => (int) ($growth[$m] ?? 0))->values()];
+        $chart = ['labels' => $months->map(fn ($m) => Carbon::createFromFormat('Y-m', $m)->format('M Y'))->values(), 'data' => $months->map(fn ($m) => (int) ($growth[$m] ?? 0))->values()];
 
         $shops = Shop::withCount(['branches', 'users'])->latest()->limit(6)->get();
         $signups = SignupRequest::where('status', 'pending')->latest()->limit(5)->get();

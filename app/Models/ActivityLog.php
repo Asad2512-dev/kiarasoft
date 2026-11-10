@@ -18,8 +18,23 @@ class ActivityLog extends Model
         return ['properties' => 'array', 'created_at' => 'datetime'];
     }
 
-    public function user() { return $this->belongsTo(User::class)->withTrashed(); }
-    public function shop() { return $this->belongsTo(Shop::class); }
-    public function branch() { return $this->belongsTo(Branch::class); }
-    public function subject() { return $this->morphTo(); }
+    public function user()
+    {
+        return $this->belongsTo(User::class)->withTrashed();
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function subject()
+    {
+        return $this->morphTo();
+    }
 }

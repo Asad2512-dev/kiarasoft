@@ -24,10 +24,25 @@ class Product extends Model
         return ['is_active' => 'boolean', 'unit' => Unit::class];
     }
 
-    public function shop() { return $this->belongsTo(Shop::class); }
-    public function category() { return $this->belongsTo(Category::class)->withTrashed(); }
-    public function inventory() { return $this->hasMany(Inventory::class); }
-    public function saleItems() { return $this->hasMany(SaleItem::class); }
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class)->withTrashed();
+    }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class);
+    }
+
+    public function saleItems()
+    {
+        return $this->hasMany(SaleItem::class);
+    }
 
     public function imageUrl(): ?string
     {

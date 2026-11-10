@@ -18,9 +18,28 @@ class Branch extends Model
         return ['is_active' => 'boolean'];
     }
 
-    public function shop() { return $this->belongsTo(Shop::class); }
-    public function manager() { return $this->belongsTo(User::class, 'manager_id'); }
-    public function users() { return $this->belongsToMany(User::class)->withTimestamps(); }
-    public function inventory() { return $this->hasMany(Inventory::class); }
-    public function sales() { return $this->hasMany(Sale::class); }
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
 }

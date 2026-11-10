@@ -1,0 +1,87 @@
+# Editing KiraSoft
+
+## Everyday changes through the website
+
+Sign in with an account that has permission to make the change. Use Products for product names, prices and barcodes; Categories for product groups; Inventory for stock adjustments; Branches for branch details; Employees for staff accounts; and Settings for shop preferences. Super Admin manages shops from Shops.
+
+These changes do not require editing code or rebuilding the website.
+
+## Find the right file
+
+| What you want to change | File or folder |
+| --- | --- |
+| Landing page words, sections and buttons | `resources/views/landing.blade.php` |
+| Login form text | `resources/views/auth/login.blade.php` |
+| Shop registration form | `resources/views/auth/signup.blade.php` |
+| Logo and surrounding layout on login and registration pages | `resources/views/layouts/guest.blade.php` |
+| Sidebar links | `resources/views/partials/sidebar.blade.php` |
+| Layout shared by signed-in pages | `resources/views/layouts/app.blade.php` |
+| Error page titles and messages | `resources/views/errors/` |
+| Appearance shared by error pages | `resources/views/layouts/error.blade.php` |
+| Main colors, font, spacing and corner sizes | `resources/scss/_tokens.scss` |
+| Main page styles | `resources/scss/app.scss` |
+| Confirmation dialog wording and behavior | `resources/js/confirm.js` |
+| Images | `public/images/` |
+| Local database connection and demo password | `.env` |
+
+Files ending in `.blade.php` contain page markup. You can edit the visible words between HTML tags. Keep tags such as `<a>` and `</a>`, expressions inside `{{ ... }}`, and instructions starting with `@` intact. For example, change `Sign in` in `<button type="submit">Sign in</button>` to change the button label.
+
+## Make a small text change
+
+1. Save a copy of the file you plan to edit, outside the project.
+2. Open the file in your editor and search for the visible text.
+3. Change the words, save, and refresh the browser.
+4. Check the page on a phone-sized window too.
+
+If old text still appears, run this command from the project folder and refresh:
+
+```bash
+./bin/mamp php artisan view:clear
+```
+
+## Change colors or JavaScript
+
+In `_tokens.scss`, `$ks-brand-600` is the main green, `$ks-brand-900` is the dark green, and `$ks-accent` is the gold accent. Some templates also contain their own color values; search for the existing color when changing those.
+
+After changing any file in `resources/scss/` or `resources/js/`, rebuild the browser files:
+
+```bash
+npm ci
+npm run build
+```
+
+Run `npm ci` when setting up the project or when `package-lock.json` changes. After that, `npm run build` is enough. Refresh the browser after a successful build. Edit the source files above; `public/build/` is produced by this command.
+
+## How the code is organized
+
+| Folder | Purpose |
+| --- | --- |
+| `routes/` | Matches a web address to the code that handles it |
+| `app/Http/Controllers/` | Receives form submissions and prepares page data |
+| `app/Models/` | Represents database records such as products and sales |
+| `app/Services/` | Handles billing, stock, returns, reports and backups |
+| `resources/views/` | Controls what people see on each page |
+| `database/migrations/` | Defines database tables |
+| `tests/` | Checks calculations, permissions and application behavior |
+
+Changes to payments, stock calculations, permissions or database tables need a developer and testing. Ask a developer to review those changes before using them with real sales data.
+
+## Useful commands
+
+Run commands from the project folder. The MAMP launcher selects MAMP PHP instead of the system PHP.
+
+```bash
+# Start the local website. Press Ctrl+C to stop it.
+./bin/mamp php artisan serve
+
+# Check that page templates compile.
+./bin/mamp php artisan view:cache
+
+# Format PHP source files consistently.
+./bin/mamp php vendor/bin/pint
+
+# Run calculation tests without changing the database.
+./bin/mamp php artisan test --testsuite=Unit
+```
+
+Keep `.env` private. Its values belong to your local installation. Reseeding is not needed for text or color edits.

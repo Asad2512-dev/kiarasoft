@@ -11,13 +11,14 @@ use App\Models\Shop;
 use App\Models\User;
 use App\Services\CheckoutService;
 use App\Services\InventoryService;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Str;
 
 abstract class TestCase extends BaseTestCase
 {
     /** Each actingAs() starts a fresh session, as a real login would (needed with AuthenticateSession). */
-    public function actingAs(\Illuminate\Contracts\Auth\Authenticatable $user, $guard = null)
+    public function actingAs(Authenticatable $user, $guard = null)
     {
         if (app('auth')->guard($guard)->user()?->getAuthIdentifier() !== $user->getAuthIdentifier()) {
             $this->flushSession();

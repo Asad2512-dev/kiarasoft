@@ -11,10 +11,10 @@
 <body>
 <div class="auth-wrap">
     <aside class="auth-aside">
-        <div class="d-flex align-items-center gap-2 fw-bold fs-5">
+        <a href="{{ route('home') }}" class="d-flex align-items-center gap-2 fw-bold fs-5 text-white text-decoration-none" aria-label="KiraSoft home">
             <span class="brand-mark d-grid rounded-3" style="width:40px;height:40px;place-items:center;background:linear-gradient(135deg,#10b981,#f59e0b)"><i class="bi bi-basket2-fill"></i></span>
             KiraSoft
-        </div>
+        </a>
         <div style="max-width: 460px">
             <h2 class="mb-3">Billing &amp; inventory, made simple for every Kiryana store.</h2>
             <p class="mb-4" style="color:rgba(255,255,255,.75)">Fast checkout, live stock across all your branches and reports you can trust, in Pakistani Rupees.</p>
@@ -26,9 +26,9 @@
     </aside>
     <main class="auth-panel">
         <div class="auth-card">
-            <div class="d-lg-none d-flex align-items-center gap-2 fw-bold fs-5 mb-4">
+            <a href="{{ route('home') }}" class="d-lg-none d-flex align-items-center gap-2 fw-bold fs-5 mb-4 text-body text-decoration-none" aria-label="KiraSoft home">
                 <span class="d-grid rounded-3 text-white" style="width:40px;height:40px;place-items:center;background:linear-gradient(135deg,#10b981,#f59e0b)"><i class="bi bi-basket2-fill"></i></span> KiraSoft
-            </div>
+            </a>
             @yield('content')
         </div>
     </main>

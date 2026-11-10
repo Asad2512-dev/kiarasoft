@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class ActivityLogController extends Controller
@@ -37,6 +38,6 @@ class ActivityLogController extends Controller
             ->latest('id')->paginate(30)->withQueryString();
 
         return view('activity.index', ['logs' => $logs, 'branches' => collect(), 'from' => $from, 'to' => $to, 'platform' => true,
-            'shops' => \App\Models\Shop::orderBy('name')->get(['id', 'name'])]);
+            'shops' => Shop::orderBy('name')->get(['id', 'name'])]);
     }
 }

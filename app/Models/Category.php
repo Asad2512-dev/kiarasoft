@@ -19,6 +19,13 @@ class Category extends Model
         return ['is_active' => 'boolean'];
     }
 
-    public function shop() { return $this->belongsTo(Shop::class); }
-    public function products() { return $this->hasMany(Product::class); }
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

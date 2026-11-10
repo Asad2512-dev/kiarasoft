@@ -8,6 +8,7 @@ use App\Models\SignupRequest;
 use App\Models\User;
 use App\Services\BackupService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class PlatformTest extends TestCase
@@ -60,7 +61,7 @@ class PlatformTest extends TestCase
         $this->assertSame(1, $counts['shops']);
         $this->assertSame(1, $counts['sales']);
         $this->assertSame(2, $counts['products']);
-        \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
+        Artisan::call('migrate:fresh');
         @unlink(storage_path('app/private/backups/'.$backup->filename));
         \DB::beginTransaction();
     }

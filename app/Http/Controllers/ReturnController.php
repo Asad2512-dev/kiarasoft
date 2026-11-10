@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sale;
 use App\Models\SaleReturn;
 use App\Services\ReturnService;
+use App\Support\Money;
 use Illuminate\Http\Request;
 
 class ReturnController extends Controller
@@ -50,7 +51,7 @@ class ReturnController extends Controller
         ]);
         $return = $service->process($request->user(), $sale, $data['quantities'], $data['reason'], $request->boolean('restock'));
 
-        return redirect()->route('returns.show', $return)->with('success', "Return {$return->return_no} recorded. Refund ".\App\Support\Money::format($return->refund_amount).' to the customer.');
+        return redirect()->route('returns.show', $return)->with('success', "Return {$return->return_no} recorded. Refund ".Money::format($return->refund_amount).' to the customer.');
     }
 
     public function show(Request $request, SaleReturn $saleReturn)

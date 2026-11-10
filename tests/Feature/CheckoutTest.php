@@ -96,8 +96,18 @@ class CheckoutTest extends TestCase
     public function test_excessive_discount_and_short_cash_are_rejected(): void
     {
         $f = $this->makeShop();
-        try { $this->sell($f, [['product_id' => $f->tea->id, 'quantity' => '1']], ['discount_type' => 'percent', 'discount_value' => '60']); $this->fail(); } catch (BusinessRuleException $e) { $this->assertStringContainsString('cannot exceed', $e->getMessage()); }
-        try { $this->sell($f, [['product_id' => $f->tea->id, 'quantity' => '1']], ['amount_tendered' => '100']); $this->fail(); } catch (BusinessRuleException $e) { $this->assertStringContainsString('less than the total', $e->getMessage()); }
+        try {
+            $this->sell($f, [['product_id' => $f->tea->id, 'quantity' => '1']], ['discount_type' => 'percent', 'discount_value' => '60']);
+            $this->fail();
+        } catch (BusinessRuleException $e) {
+            $this->assertStringContainsString('cannot exceed', $e->getMessage());
+        }
+        try {
+            $this->sell($f, [['product_id' => $f->tea->id, 'quantity' => '1']], ['amount_tendered' => '100']);
+            $this->fail();
+        } catch (BusinessRuleException $e) {
+            $this->assertStringContainsString('less than the total', $e->getMessage());
+        }
         $this->assertSame(0, Sale::count());
     }
 
@@ -117,7 +127,9 @@ class CheckoutTest extends TestCase
     {
         $f = $this->makeShop();
         $n = [];
-        foreach (range(1, 3) as $i) { $n[] = $this->sell($f, [['product_id' => $f->tea->id, 'quantity' => '1']])->invoice_no; }
+        foreach (range(1, 3) as $i) {
+            $n[] = $this->sell($f, [['product_id' => $f->tea->id, 'quantity' => '1']])->invoice_no;
+        }
         $nb = $this->sell($f, [['product_id' => $f->tea->id, 'quantity' => '1']], [], $f->cashierB, $f->b2)->invoice_no;
         $this->assertStringEndsWith('-0001', $n[0]);
         $this->assertStringEndsWith('-0003', $n[2]);

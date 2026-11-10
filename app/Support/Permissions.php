@@ -7,7 +7,7 @@ use App\Enums\Role;
 /**
  * Single source of truth for role -> permission mapping.
  * Record-level scoping (shop / branch) is enforced separately in policies
- * and in User::accessibleBranchIds(). See docs/PERMISSIONS.md.
+ * and in User::accessibleBranchIds().
  */
 final class Permissions
 {

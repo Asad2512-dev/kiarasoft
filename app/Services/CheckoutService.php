@@ -15,7 +15,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 /**
- * The critical billing transaction (see docs/ARCHITECTURE.md §Billing).
+ * The billing transaction.
  * All prices, totals and stock are computed/validated here on the server;
  * client-side totals are never trusted.
  */

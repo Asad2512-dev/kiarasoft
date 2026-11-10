@@ -10,7 +10,6 @@
         <div class="card"><div class="card-body small text-muted">
             <strong class="text-dark d-block mb-1">Restore testing</strong>
             "Test restore" loads the backup into the separate <span class="mono">{{ config('kirasoft.restore_test_database') }}</span> database and verifies row counts. It never touches the live database.
-            The full manual restore procedure is in <span class="mono">docs/SETUP.md</span>.
         </div></div>
     </div>
     <div class="col-lg-8"><div class="card table-card">

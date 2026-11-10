@@ -11,6 +11,7 @@ use App\Models\InventoryMovement;
 use App\Models\Product;
 use App\Services\ActivityLogger;
 use App\Services\InventoryService;
+use App\Support\Csv;
 use App\Support\Money;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -134,7 +135,7 @@ class ProductController extends Controller
             $out = fopen('php://output', 'w');
             fputcsv($out, ['SKU', 'Name', 'Category', 'Unit', 'Price (PKR)', 'Cost (PKR)', 'Stock', 'Low-stock threshold', 'Status']);
             foreach ($products as $p) {
-                fputcsv($out, array_map([\App\Support\Csv::class, 'safe'], [$p->sku, $p->name, $p->category?->name, $p->unit->value, $p->price, $p->cost_price, Money::qty($p->stock ?? 0), $p->low_stock_threshold, $p->is_active ? 'Active' : 'Inactive']));
+                fputcsv($out, array_map([Csv::class, 'safe'], [$p->sku, $p->name, $p->category?->name, $p->unit->value, $p->price, $p->cost_price, Money::qty($p->stock ?? 0), $p->low_stock_threshold, $p->is_active ? 'Active' : 'Inactive']));
             }
             fclose($out);
         }, 'products-'.now()->format('Ymd').'.csv', ['Content-Type' => 'text/csv']);

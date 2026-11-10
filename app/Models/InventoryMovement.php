@@ -19,8 +19,23 @@ class InventoryMovement extends Model
         return ['type' => MovementType::class, 'created_at' => 'datetime'];
     }
 
-    public function product() { return $this->belongsTo(Product::class)->withTrashed(); }
-    public function branch() { return $this->belongsTo(Branch::class); }
-    public function user() { return $this->belongsTo(User::class)->withTrashed(); }
-    public function reference() { return $this->morphTo(); }
+    public function product()
+    {
+        return $this->belongsTo(Product::class)->withTrashed();
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class)->withTrashed();
+    }
+
+    public function reference()
+    {
+        return $this->morphTo();
+    }
 }

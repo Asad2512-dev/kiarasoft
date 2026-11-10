@@ -69,6 +69,6 @@
 <div class="card mt-3"><div class="card-body small text-muted">
     <strong class="text-dark">How these figures are calculated.</strong>
     Gross = Σ invoice subtotals. Net = Σ invoice totals (gross − discounts + tax) − refunds processed in the period. Returns are counted on the day they are processed.
-    Sales are counted on the invoice date. Full definitions: <span class="mono">docs/ARCHITECTURE.md</span>.
+    Sales are counted on the invoice date.
 </div></div>
 @endsection

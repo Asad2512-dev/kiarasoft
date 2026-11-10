@@ -13,5 +13,8 @@ class SignupRequest extends Model
         return ['reviewed_at' => 'datetime'];
     }
 
-    public function reviewer() { return $this->belongsTo(User::class, 'reviewed_by'); }
+    public function reviewer()
+    {
+        return $this->belongsTo(User::class, 'reviewed_by');
+    }
 }

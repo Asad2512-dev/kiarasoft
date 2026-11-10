@@ -10,6 +10,7 @@ use App\Models\InventoryMovement;
 use App\Models\Product;
 use App\Services\ActivityLogger;
 use App\Services\InventoryService;
+use App\Support\Money;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -85,7 +86,7 @@ class InventoryController extends Controller
         abort_unless($branch->is_active, 422, 'Branch is inactive.');
         $movement = $service->adjust($user, $branch, Product::findOrFail($data['product_id']), MovementType::from($data['type']), (string) $data['quantity'], $data['reason'] ?? null);
 
-        return redirect()->route('inventory.create')->with('success', "Stock updated: {$movement->product->name} at {$branch->name} is now ".\App\Support\Money::qty($movement->quantity_after).' '.$movement->product->unit->short().'.');
+        return redirect()->route('inventory.create')->with('success', "Stock updated: {$movement->product->name} at {$branch->name} is now ".Money::qty($movement->quantity_after).' '.$movement->product->unit->short().'.');
     }
 
     public function threshold(Request $request, Inventory $inventory, ActivityLogger $logger)

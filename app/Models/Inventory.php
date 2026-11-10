@@ -11,8 +11,15 @@ class Inventory extends Model
 
     protected $fillable = ['shop_id', 'branch_id', 'product_id', 'quantity', 'low_stock_threshold'];
 
-    public function product() { return $this->belongsTo(Product::class)->withTrashed(); }
-    public function branch() { return $this->belongsTo(Branch::class); }
+    public function product()
+    {
+        return $this->belongsTo(Product::class)->withTrashed();
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
 
     /** Effective threshold: branch override -> product -> shop default. */
     public function effectiveThreshold(?string $shopDefault = null): string

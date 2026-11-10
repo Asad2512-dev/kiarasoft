@@ -1,3 +1,8 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Too many attempts · KiraSoft</title>
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f6f8fa;color:#1d2939;padding:1rem}.b{text-align:center;max-width:420px}.c{font-size:4.5rem;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#059669,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}h1{font-size:1.4rem;margin:.75rem 0 .5rem}p{color:#667085;margin:0 0 1.5rem}a{display:inline-block;background:#059669;color:#fff;text-decoration:none;padding:.7rem 1.3rem;border-radius:.6rem;font-weight:600}</style></head>
-<body><div class="b"><div class="c">429</div><h1>Too many attempts</h1><p>{{ $exception?->getMessage() && 429 == 403 ? $exception->getMessage() : 'Please wait a minute before trying again.' }}</p><a href="{{ url('/') }}">Go to dashboard</a></div></body></html>
+@extends('layouts.error')
+
+@section('code', '429')
+@section('title', 'Too many attempts')
+
+@section('message')
+    Please wait a minute before trying again.
+@endsection

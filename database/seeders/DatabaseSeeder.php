@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seeds the clearly-labelled DEMO data set (see docs/DEMO_GUIDE.md).
+     * Seeds the demo data set.
      * Never run this against a production database.
      */
     public function run(): void

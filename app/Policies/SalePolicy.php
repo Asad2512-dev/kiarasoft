@@ -7,7 +7,10 @@ use App\Models\User;
 
 class SalePolicy
 {
-    public function viewAny(User $user): bool { return $user->hasPermission('sales.view'); }
+    public function viewAny(User $user): bool
+    {
+        return $user->hasPermission('sales.view');
+    }
 
     public function view(User $user, Sale $sale): bool
     {

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Sale;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -50,7 +51,7 @@ class AuthorizationTest extends TestCase
         $this->actingAs($u)->getJson("/pos/products?branch={$b->b1->id}")->assertNotFound();
         $this->actingAs($u)->postJson('/pos/checkout', ['branch_id' => $b->b1->id, 'idempotency_key' => (string) \Str::uuid(),
             'items' => [['product_id' => $b->tea->id, 'quantity' => 1]], 'amount_tendered' => 1000])->assertStatus(422);
-        $this->assertSame(1, \App\Models\Sale::count());
+        $this->assertSame(1, Sale::count());
         // product listing never shows the other shop's products
         $this->actingAs($u)->get('/products')->assertSee('RICE')->assertDontSee($b->shop->name);
     }

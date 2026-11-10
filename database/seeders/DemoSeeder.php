@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Enums\MovementType;
 use App\Enums\Role;
+use App\Exceptions\BusinessRuleException;
 use App\Models\Branch;
 use App\Models\Category;
+use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Shop;
@@ -119,7 +121,9 @@ class DemoSeeder extends Seeder
                 ]);
                 $products[] = $p;
                 foreach ([$g11, $sdr, $btn] as $b) {
-                    $qty = match ($unit) { 'g' => mt_rand(4000, 8000), 'kg', 'l' => mt_rand(80, 200), default => mt_rand(40, 120) };
+                    $qty = match ($unit) {
+                        'g' => mt_rand(4000, 8000), 'kg', 'l' => mt_rand(80, 200), default => mt_rand(40, 120)
+                    };
                     $inventory->adjust($owner, $b, $p, MovementType::Opening, (string) $qty, 'Opening stock');
                 }
             }
@@ -156,7 +160,9 @@ class DemoSeeder extends Seeder
                     $pool = mt_rand(0, 3) ? $popular : $products;
                     foreach ((array) array_rand($pool, mt_rand(1, 6)) as $k) {
                         $p = $pool[$k];
-                        $qty = match ($p->unit->value) { 'kg', 'l' => [0.5, 1, 1.5, 2, 2.5, 5][mt_rand(0, 5)], 'g' => [50, 100, 250][mt_rand(0, 2)], default => mt_rand(1, 3) };
+                        $qty = match ($p->unit->value) {
+                            'kg', 'l' => [0.5, 1, 1.5, 2, 2.5, 5][mt_rand(0, 5)], 'g' => [50, 100, 250][mt_rand(0, 2)], default => mt_rand(1, 3)
+                        };
                         $items[] = ['product_id' => $p->id, 'quantity' => (string) $qty];
                     }
                     $preview = 0;
@@ -171,7 +177,7 @@ class DemoSeeder extends Seeder
                             'idempotency_key' => (string) Str::uuid(), 'amount_tendered' => (string) max($tender, 1),
                             'customer_name' => mt_rand(0, 5) === 0 ? ['Ali Raza', 'Hina Malik', 'Zeeshan', 'Mrs. Kazmi', 'Ahmed Bhai'][mt_rand(0, 4)] : null,
                         ]);
-                    } catch (\App\Exceptions\BusinessRuleException) {
+                    } catch (BusinessRuleException) {
                         // skip a basket that would oversell (realistic: item ran out)
                     }
                 }
@@ -208,7 +214,7 @@ class DemoSeeder extends Seeder
         $lowSet = [[$g11, 'OIL-5L', '3'], [$g11, 'EGGS-12', '4'], [$sdr, 'TEA-DAN-900', '2'], [$btn, 'MILK-UHT-1', '6'], [$g11, 'SNK-CHP-70', '0'], [$sdr, 'CLN-WSH-1', '0'], [$btn, 'GHEE-DESI-500', '1']];
         foreach ($lowSet as [$b, $sku, $target]) {
             $p = collect($products)->firstWhere('sku', $sku);
-            $inv = \App\Models\Inventory::where('branch_id', $b->id)->where('product_id', $p->id)->first();
+            $inv = Inventory::where('branch_id', $b->id)->where('product_id', $p->id)->first();
             if (Money::qtyToMilli($inv->quantity) !== Money::qtyToMilli($target)) {
                 $inventory->adjust($manager->canAccessBranch($b) ? $manager : $owner, $b, $p, MovementType::Adjustment, $target, 'Physical count correction');
             }

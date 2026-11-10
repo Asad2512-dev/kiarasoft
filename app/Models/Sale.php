@@ -19,12 +19,35 @@ class Sale extends Model
         return ['sold_at' => 'datetime', 'status' => SaleStatus::class];
     }
 
-    public function shop() { return $this->belongsTo(Shop::class); }
-    public function branch() { return $this->belongsTo(Branch::class); }
-    public function cashier() { return $this->belongsTo(User::class, 'cashier_id')->withTrashed(); }
-    public function items() { return $this->hasMany(SaleItem::class); }
-    public function payment() { return $this->hasOne(Payment::class); }
-    public function returns() { return $this->hasMany(SaleReturn::class); }
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function cashier()
+    {
+        return $this->belongsTo(User::class, 'cashier_id')->withTrashed();
+    }
+
+    public function items()
+    {
+        return $this->hasMany(SaleItem::class);
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
+
+    public function returns()
+    {
+        return $this->hasMany(SaleReturn::class);
+    }
 
     public function netTotal(): string
     {

@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Services\AlertService;
-use App\Support\Money;
 use App\Support\Permissions;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;

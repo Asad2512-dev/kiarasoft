@@ -21,7 +21,10 @@ class ShopSetting extends Model
         return ['tax_enabled' => 'boolean'];
     }
 
-    public function shop() { return $this->belongsTo(Shop::class); }
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
 
     public function currencySymbol(): string
     {

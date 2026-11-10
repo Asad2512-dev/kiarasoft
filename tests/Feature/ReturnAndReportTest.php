@@ -35,9 +35,18 @@ class ReturnAndReportTest extends TestCase
         $sale = $this->sell($f, [['product_id' => $f->tea->id, 'quantity' => '2']]);
         $item = $sale->items()->first();
         $svc = app(ReturnService::class);
-        try { $svc->process($f->manager, $sale, [$item->id => '3'], 'x'); $this->fail(); } catch (BusinessRuleException $e) { $this->assertStringContainsString('more', $e->getMessage()); }
+        try {
+            $svc->process($f->manager, $sale, [$item->id => '3'], 'x');
+            $this->fail();
+        } catch (BusinessRuleException $e) {
+            $this->assertStringContainsString('more', $e->getMessage());
+        }
         $svc->process($f->manager, $sale, [$item->id => '2'], 'x');
-        try { $svc->process($f->manager, $sale->fresh(), [$item->id => '1'], 'x'); $this->fail(); } catch (BusinessRuleException) {}
+        try {
+            $svc->process($f->manager, $sale->fresh(), [$item->id => '1'], 'x');
+            $this->fail();
+        } catch (BusinessRuleException) {
+        }
         $this->assertSame('returned', $sale->fresh()->status->value);
         $this->assertSame('399.98', $sale->fresh()->refunded_total);
     }
@@ -91,6 +100,8 @@ class ReturnAndReportTest extends TestCase
         $csv = $this->actingAs($f->admin)->get('/reports/export?period=today&type=daily')->assertOk()->streamedContent();
         $this->assertStringContainsString('199.99', $csv);
         $this->assertDatabaseHas('activity_logs', ['action' => 'report.exported']);
-        foreach (['branch', 'cashier', 'products'] as $t) { $this->actingAs($f->admin)->get("/reports/export?type={$t}")->assertOk(); }
+        foreach (['branch', 'cashier', 'products'] as $t) {
+            $this->actingAs($f->admin)->get("/reports/export?type={$t}")->assertOk();
+        }
     }
 }

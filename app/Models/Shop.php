@@ -13,12 +13,35 @@ class Shop extends Model
 
     protected $fillable = ['name', 'slug', 'owner_name', 'email', 'phone', 'address', 'city', 'status'];
 
-    public function branches(): HasMany { return $this->hasMany(Branch::class); }
-    public function users(): HasMany { return $this->hasMany(User::class); }
-    public function products(): HasMany { return $this->hasMany(Product::class); }
-    public function categories(): HasMany { return $this->hasMany(Category::class); }
-    public function sales(): HasMany { return $this->hasMany(Sale::class); }
-    public function settings(): HasOne { return $this->hasOne(ShopSetting::class); }
+    public function branches(): HasMany
+    {
+        return $this->hasMany(Branch::class);
+    }
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function categories(): HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(Sale::class);
+    }
+
+    public function settings(): HasOne
+    {
+        return $this->hasOne(ShopSetting::class);
+    }
 
     public function isActive(): bool
     {

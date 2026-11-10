@@ -13,7 +13,18 @@ class SaleReturnItem extends Model
         return ['restocked' => 'boolean'];
     }
 
-    public function saleReturn() { return $this->belongsTo(SaleReturn::class); }
-    public function saleItem() { return $this->belongsTo(SaleItem::class); }
-    public function product() { return $this->belongsTo(Product::class)->withTrashed(); }
+    public function saleReturn()
+    {
+        return $this->belongsTo(SaleReturn::class);
+    }
+
+    public function saleItem()
+    {
+        return $this->belongsTo(SaleItem::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class)->withTrashed();
+    }
 }

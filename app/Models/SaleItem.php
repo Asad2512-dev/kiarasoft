@@ -12,8 +12,15 @@ class SaleItem extends Model
         'cost_price', 'line_total', 'returned_quantity',
     ];
 
-    public function sale() { return $this->belongsTo(Sale::class); }
-    public function product() { return $this->belongsTo(Product::class)->withTrashed(); }
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class)->withTrashed();
+    }
 
     public function returnableQuantity(): string
     {
