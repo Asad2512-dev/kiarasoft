@@ -107,4 +107,6 @@ $dropdown-box-shadow: $ks-shadow-md;
 $badge-font-weight: 600;
 $pagination-border-radius: $ks-radius-sm;
 $enable-shadows: false;
+// Force white text on brand-coloured buttons/badges (Bootstrap would otherwise pick black)
+$min-contrast-ratio: 2.5;
 $enable-negative-margins: true;

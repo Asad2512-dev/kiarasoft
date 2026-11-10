@@ -392,3 +392,9 @@ body.sidebar-collapsed {
 @media (prefers-reduced-motion: reduce) { .lp-js .lp-reveal { opacity: 1; transform: none; } }
 
 .lp main { overflow-x: clip; }
+
+// White text on all solid coloured buttons and badges, in every state
+@each $c in (primary, success, danger, info, secondary, dark) {
+  .btn-#{$c} { --bs-btn-color: #fff; --bs-btn-hover-color: #fff; --bs-btn-active-color: #fff; --bs-btn-disabled-color: #fff; }
+  .text-bg-#{$c} { color: #fff !important; }
+}
